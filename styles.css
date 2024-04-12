@@ -1,0 +1,23 @@
+#sketchpad-container {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    border: 5px solid black;
+    padding: 0;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.square {
+    width: 10px;
+    height: 10px;
+    border: 0;
+    padding: 0;
+    flex: 0;
+    flex-basis: 10px;
+    background-color: white;
+}
+
+.square:hover {
+    background-color: red;
+}
