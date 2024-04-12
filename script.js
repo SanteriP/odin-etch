@@ -1,8 +1,17 @@
 const generateButton = document.querySelector("#generate-button");
 const content = document.querySelector("#content");
 
-generateButton.addEventListener('click', (askGridSize));
+generateButton.addEventListener('click', () => {
+    setTimeout(() => {
+        generateButton.classList.add("buttonPressed");
+    }, "1");
+    setTimeout(() => {
+        askGridSize();
+        generateButton.classList.remove("buttonPressed");
+    }, "280");
+});
 
+generateGrid(16,16);
 
 // Functions
 function askGridSize() {
@@ -28,9 +37,8 @@ function askGridSize() {
 
 function generateGrid(columns,rows) {
     const previousSketchpad = document.querySelector("#sketchpad-container");
-    if (previousSketchpad) {
-        content.removeChild(previousSketchpad);
-    }
+
+    previousSketchpad.remove();
 
     const sketchpadContainer = document.createElement("div");
     sketchpadContainer.setAttribute("id","sketchpad-container");
