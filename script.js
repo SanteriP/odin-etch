@@ -1,13 +1,31 @@
 const generateButton = document.querySelector("#generate-button");
 const content = document.querySelector("#content");
 
-generateButton.addEventListener('click', () => {
-    let squares = +prompt("Squares per side, max 100");
-    generateGrid(squares,squares);
-});
+generateButton.addEventListener('click', (askGridSize));
 
 
 // Functions
+function askGridSize() {
+    let squares = 0;
+    while (squares < 2 || squares > 100) {
+        squares = prompt("Squares per side, max 100");
+        console.log(squares);
+
+        if (squares === null) {
+            return;
+        }
+
+        if (squares < 2) {
+            alert("Number must be 2 or higher");
+        }
+        else if (squares > 100) {
+            alert("Number must be 100 or lower");
+        }
+    }
+    
+    generateGrid(squares,squares);
+};
+
 function generateGrid(columns,rows) {
     const previousSketchpad = document.querySelector("#sketchpad-container");
     if (previousSketchpad) {
@@ -33,7 +51,7 @@ function generateGrid(columns,rows) {
             let randomRGB1 = Math.floor(Math.random() * 256);
             let randomRGB2 = Math.floor(Math.random() * 256);
             let randomRGB3 = Math.floor(Math.random() * 256);
-            square.style.backgroundColor = `rgb(${randomRGB1},${randomRGB1},${randomRGB1})`;
+            square.style.backgroundColor = `rgb(${randomRGB1},${randomRGB2},${randomRGB3})`;
         });
 
         sketchpadContainer.appendChild(square);
