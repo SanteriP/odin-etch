@@ -17,10 +17,14 @@ generateGrid(16,16);
 function askGridSize() {
     let squares = 0;
     while (squares < 2 || squares > 100) {
-        squares = prompt("Squares per side, max 100");
-        console.log(squares);
+        squares = prompt("Squares per side, max 100");;
 
         if (squares === null) {
+            return;
+        }
+
+        if (isNaN(parseInt(squares,10))) {
+            alert("Invalid value");
             return;
         }
 
