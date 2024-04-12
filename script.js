@@ -1,17 +1,34 @@
-const sketchpadContainer = document.querySelector("#sketchpad-container");
+const generateButton = document.querySelector("#generate-button");
+const content = document.querySelector("#content");
 
-generateGrid(16,16);
+generateButton.addEventListener('click', () => {
+    let squares = +prompt("Squares per side, max 100");
+    generateGrid(squares,squares);
+});
 
 
 // Functions
-function generateGrid(rows,columns) {
-    sketchpadContainer.style.width = `${10*rows}px`;
-    sketchpadContainer.style.height = `${10*columns}px`;
+function generateGrid(columns,rows) {
+    const previousSketchpad = document.querySelector("#sketchpad-container");
+    if (previousSketchpad) {
+        content.removeChild(previousSketchpad);
+    }
+
+    const sketchpadContainer = document.createElement("div");
+    sketchpadContainer.setAttribute("id","sketchpad-container");
+    content.appendChild(sketchpadContainer);
+    
+    let sketchpadWidth = +window.getComputedStyle(sketchpadContainer).width.slice(0,-2);
+    const pixelsPerColumn = sketchpadWidth/columns;
+    sketchpadContainer.style.height = `${rows*pixelsPerColumn}px`;
 
     for(let i = 0; i < (rows*columns); i++) {
         const square = document.createElement("div");
         square.classList.add("square");
-        
+        square.style.width = `${sketchpadWidth/columns}px`;
+        square.style.height = `${sketchpadWidth/columns}px`;
+        square.style.flexBasis = `${sketchpadWidth/columns}px`;
+
         square.addEventListener('mouseenter', () => {
             let randomRGB1 = Math.floor(Math.random() * 256);
             let randomRGB2 = Math.floor(Math.random() * 256);
